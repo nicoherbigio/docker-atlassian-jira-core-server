@@ -2,7 +2,7 @@ version: '3'
 
 services:
   jira:
-    image: nicoherbigio/atlassian-jira-core-server:7.6
+    image: nicoherbigio/atlassian-jira-core-server:latest
     restart: always
     depends_on:
       - jira-database
