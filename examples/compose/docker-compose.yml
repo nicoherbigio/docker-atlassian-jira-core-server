@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  jira:
+    image: nicoherbigio/atlassian-jira-core-server:7.6
+    restart: always
+    depends_on:
+      - jira-database
+    networks:
+      - frontend
+      - backend
+    ports:
+      - 8080:8080
+    volumes:
+      - jira-data:/var/atlassian/jira
+    environment:
+      - JVM_MINIMUM_MEMORY=${JIRA_JVM_MINIMUM_MEMORY}
+      - JVM_MAXIMUM_MEMORY=${JIRA_JVM_MAXIMUM_MEMORY}
+      - CATALINA_CONNECTOR_SECURE=${JIRA_CONNECTOR_SECURE}
+      - CATALINA_CONNECTOR_SCHEME=${JIRA_CONNECTOR_SCHEME}
+      - CATALINA_CONNECTOR_PROXYNAME=${JIRA_CONNECTOR_PROXY_NAME}
+      - CATALINA_CONNECTOR_PROXYPORT=${JIRA_CONNECTOR_PROXY_PORT}
+
+  jira-database:
+    image: postgres:9.6
+    restart: always
+    networks:
+      - backend
+    volumes:
+      - ./services/postgres/init.sh:/docker-entrypoint-initdb.d/init.sh:ro
+      - jira-database-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - JIRA_DATABASE_NAME=${JIRA_DATABASE_NAME}
+      - JIRA_DATABASE_USER=${JIRA_DATABASE_USER}
+      - JIRA_DATABASE_PASSWORD=${JIRA_DATABASE_PASSWORD}
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  jira-data:
+  jira-database-data:
