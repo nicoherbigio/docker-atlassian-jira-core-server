@@ -76,6 +76,8 @@ RUN set -ex \
     && curl -fSL ${JIRA_DOWNLOAD_URL} | tar -xz --no-same-owner --strip-components=1 -C ${JIRA_INSTALL_DIR} \
     && mkdir -p ${JIRA_INSTALL_DIR}/lib \
     && curl -fSL ${MYSQL_CONNECTOR_DOWNLOAD_URL} | tar -xz --no-same-owner --strip-components=1 -C ${JIRA_INSTALL_DIR}/lib "mysql-connector-java-${MYSQL_CONNECTOR_VERSION}/mysql-connector-java-${MYSQL_CONNECTOR_VERSION}-bin.jar" \
+    && sed -i -e 's/JVM_MINIMUM_MEMORY="\([0-9]\+[kmg]\)"/: ${JVM_MINIMUM_MEMORY:=\1}/g' ${JIRA_INSTALL_DIR}/bin/setenv.sh \
+    && sed -i -e 's/JVM_MAXIMUM_MEMORY="\([0-9]\+[kmg]\)"/: ${JVM_MAXIMUM_MEMORY:=\1}/g' ${JIRA_INSTALL_DIR}/bin/setenv.sh \
     && sed -i -e 's/port="8080"/port="8080" secure="${catalinaConnectorSecure}" scheme="${catalinaConnectorScheme}" proxyName="${catalinaConnectorProxyName}" proxyPort="${catalinaConnectorProxyPort}"/' ${JIRA_INSTALL_DIR}/conf/server.xml \
     && chown -R ${RUN_USER}:${RUN_GROUP} ${JIRA_INSTALL_DIR} \
     && chown -R ${RUN_USER}:${RUN_GROUP} ${JIRA_HOME}
