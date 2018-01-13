@@ -56,7 +56,7 @@ RUN groupadd -r -g ${RUN_GROUP_ID} ${RUN_GROUP} && useradd -r -g ${RUN_GROUP} -u
 ARG JIRA_VERSION=7.6.2
 ARG JIRA_DOWNLOAD_URL=https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-core-${JIRA_VERSION}.tar.gz
 
-ARG MYSQL_CONNECTOR_VERSION=5.1.44
+ARG MYSQL_CONNECTOR_VERSION=5.1.45
 ARG MYSQL_CONNECTOR_DOWNLOAD_URL=https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-${MYSQL_CONNECTOR_VERSION}.tar.gz
 
 ENV JIRA_INSTALL_DIR=/opt/atlassian/jira
