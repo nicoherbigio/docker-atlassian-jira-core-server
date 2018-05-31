@@ -56,9 +56,6 @@ RUN groupadd -r -g ${RUN_GROUP_ID} ${RUN_GROUP} && useradd -r -g ${RUN_GROUP} -u
 ARG JIRA_VERSION=7.10.0
 ARG JIRA_DOWNLOAD_URL=https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-core-${JIRA_VERSION}.tar.gz
 
-ARG MYSQL_CONNECTOR_VERSION=5.1.46
-ARG MYSQL_CONNECTOR_DOWNLOAD_URL=https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-${MYSQL_CONNECTOR_VERSION}.tar.gz
-
 ENV JIRA_INSTALL_DIR=/opt/atlassian/jira
 ENV JIRA_HOME=/var/atlassian/jira
 
@@ -66,16 +63,12 @@ ENV JIRA_HOME=/var/atlassian/jira
 #   - Create installation directory
 #   - Create home directory
 #   - Download and unpack Atlassian Jira Core Server
-#   - Create lib directory inside the installation directory
-#   - Download and unpack MySQL Connector
 #   - Set permissions for the Jira Core installation directory
 #   - Set permissions for the Jira Core home directory
 RUN set -ex \
     && mkdir -p ${JIRA_INSTALL_DIR} \
     && mkdir -p ${JIRA_HOME} \
     && curl -fSL ${JIRA_DOWNLOAD_URL} | tar -xz --no-same-owner --strip-components=1 -C ${JIRA_INSTALL_DIR} \
-    && mkdir -p ${JIRA_INSTALL_DIR}/lib \
-    && curl -fSL ${MYSQL_CONNECTOR_DOWNLOAD_URL} | tar -xz --no-same-owner --strip-components=1 -C ${JIRA_INSTALL_DIR}/lib "mysql-connector-java-${MYSQL_CONNECTOR_VERSION}/mysql-connector-java-${MYSQL_CONNECTOR_VERSION}-bin.jar" \
     && sed -i -e 's/JVM_MINIMUM_MEMORY="\([0-9]\+[kmg]\)"/: ${JVM_MINIMUM_MEMORY:=\1}/g' ${JIRA_INSTALL_DIR}/bin/setenv.sh \
     && sed -i -e 's/JVM_MAXIMUM_MEMORY="\([0-9]\+[kmg]\)"/: ${JVM_MAXIMUM_MEMORY:=\1}/g' ${JIRA_INSTALL_DIR}/bin/setenv.sh \
     && sed -i -e 's/port="8080"/port="8080" secure="${catalinaConnectorSecure}" scheme="${catalinaConnectorScheme}" proxyName="${catalinaConnectorProxyName}" proxyPort="${catalinaConnectorProxyPort}"/' ${JIRA_INSTALL_DIR}/conf/server.xml \
