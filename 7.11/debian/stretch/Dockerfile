@@ -53,7 +53,7 @@ RUN groupadd -r -g ${RUN_GROUP_ID} ${RUN_GROUP} && useradd -r -g ${RUN_GROUP} -u
 
 # Install Atlassian Jira Core Server inclusive MySQL Connector
 
-ARG JIRA_VERSION=7.11.0
+ARG JIRA_VERSION=7.11.1
 ARG JIRA_DOWNLOAD_URL=https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-core-${JIRA_VERSION}.tar.gz
 
 ENV JIRA_INSTALL_DIR=/opt/atlassian/jira
