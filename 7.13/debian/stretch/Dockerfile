@@ -32,7 +32,7 @@ RUN groupadd -r -g ${RUN_GROUP_ID} ${RUN_GROUP} && useradd -r -g ${RUN_GROUP} -u
 
 # Install Atlassian Jira Core Server
 
-ARG JIRA_VERSION=7.13.0
+ARG JIRA_VERSION=7.13.1
 ARG JIRA_DOWNLOAD_URL=https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-core-${JIRA_VERSION}.tar.gz
 
 ENV JIRA_INSTALL_DIR=/opt/atlassian/jira
