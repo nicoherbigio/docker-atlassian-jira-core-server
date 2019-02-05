@@ -3,27 +3,6 @@ FROM nicoherbigio/adoptopenjdk-openjdk:8u192
 LABEL maintainer="Nico Herbig <nico@nicoherbig.io>"
 
 
-# Install Oracle Java Development Kit (JDK)
-
-ARG JAVA_DOWNLOAD_URL=http://download.oracle.com/otn-pub/java/jdk/8u191-b12/2787e4a523244c269598db4e85c51e0c/jdk-8u191-linux-x64.tar.gz
-
-ARG JAVA_INSTALL_DIR=/usr/lib/jvm
-
-RUN set -ex \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends curl ca-certificates \
-    && mkdir -p ${JAVA_INSTALL_DIR} \
-    && curl -fSL -H "Cookie: oraclelicense=accept-securebackup-cookie" ${JAVA_DOWNLOAD_URL} | tar -xz --no-same-owner --strip-components=1 -C ${JAVA_INSTALL_DIR} \
-    && update-alternatives --install /usr/bin/java java ${JAVA_INSTALL_DIR}/bin/java 1 \
-    && update-alternatives --install /usr/bin/javac javac ${JAVA_INSTALL_DIR}/bin/javac 1 \
-    && update-alternatives --install /usr/bin/jar jar ${JAVA_INSTALL_DIR}/bin/jar 1 \
-    && apt-get remove -y curl ca-certificates \
-    && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/*
-
-ENV JAVA_HOME=${JAVA_INSTALL_DIR}
-
-
 # Install additional required software packages
 
 RUN set -ex \
