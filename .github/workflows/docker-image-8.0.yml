@@ -11,7 +11,9 @@ env:
   DOCKER_IMAGE_CONTEXT_PATH: 8.0/debian/default/
   DOCKERHUB_IMAGE_TAGS: |
     nicoherbigde/atlassian-jira-core-server:8.0
+    nicoherbigio/atlassian-jira-core-server:8.0
     nicoherbigde/atlassian-jira-core-server:8.0.2
+    nicoherbigio/atlassian-jira-core-server:8.0.2
 
 jobs:
   build-and-push:
