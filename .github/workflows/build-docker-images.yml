@@ -1,0 +1,61 @@
+name: Docker image CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/**'
+      - '8.13/**'
+      - '8.20/**'
+  schedule:
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+
+jobs:
+  build-docker-images:
+    runs-on: [ubuntu-20.04]
+
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [8.13, 8.20]
+        include:
+          - version: 8.13
+            docker-context: 8.13/ubuntu/default
+            docker-tags: |
+              nicoherbigde/atlassian-jira-core-server:8.13
+              nicoherbigio/atlassian-jira-core-server:8.13
+              nicoherbigde/atlassian-jira-core-server:8.13.22
+              nicoherbigio/atlassian-jira-core-server:8.13.22
+          - version: 8.20
+            docker-context: 8.20/ubuntu/default
+            docker-tags: |
+              nicoherbigde/atlassian-jira-core-server:8.20
+              nicoherbigio/atlassian-jira-core-server:8.20
+              nicoherbigde/atlassian-jira-core-server:8.20.11
+              nicoherbigio/atlassian-jira-core-server:8.20.11
+
+    steps:
+      - name: Checkout Git Repository
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Docker image and Push it to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          context: ${{ matrix.docker-context }}
+          no-cache: true
+          push: true
+          tags: ${{ matrix.docker-tags }}
