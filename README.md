@@ -5,7 +5,7 @@
 ## Supported tags and respective `Dockerfile` links
 
  * [`8.20`, `8.20.14` (8.20/ubuntu/default/Dockerfile)](https://github.com/nicoherbigio/docker-atlassian-jira-core-server/blob/main/8.20/debian/default/Dockerfile)
- * [`8.13`, `8.13.22` (8.13/ubuntu/default/Dockerfile)](https://github.com/nicoherbigio/docker-atlassian-jira-core-server/blob/main/8.13/debian/default/Dockerfile)
+ * [`8.13`, `8.13.24` (8.13/ubuntu/default/Dockerfile)](https://github.com/nicoherbigio/docker-atlassian-jira-core-server/blob/main/8.13/debian/default/Dockerfile)
 
 ## Copyleft
 

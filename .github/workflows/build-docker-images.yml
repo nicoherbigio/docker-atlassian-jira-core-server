@@ -26,8 +26,8 @@ jobs:
             docker-tags: |
               nicoherbigde/atlassian-jira-core-server:8.13
               nicoherbigio/atlassian-jira-core-server:8.13
-              nicoherbigde/atlassian-jira-core-server:8.13.22
-              nicoherbigio/atlassian-jira-core-server:8.13.22
+              nicoherbigde/atlassian-jira-core-server:8.13.24
+              nicoherbigio/atlassian-jira-core-server:8.13.24
           - version: 8.20
             docker-context: 8.20/ubuntu/default
             docker-tags: |
