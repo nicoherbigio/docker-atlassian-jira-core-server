@@ -1,4 +1,4 @@
-FROM atlassian/jira-core:8.20.11
+FROM atlassian/jira-core:8.20.12
 
 LABEL maintainer="Nico Herbig <nico@nicoherbig.io>"
 

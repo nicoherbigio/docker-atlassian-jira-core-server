@@ -33,8 +33,8 @@ jobs:
             docker-tags: |
               nicoherbigde/atlassian-jira-core-server:8.20
               nicoherbigio/atlassian-jira-core-server:8.20
-              nicoherbigde/atlassian-jira-core-server:8.20.11
-              nicoherbigio/atlassian-jira-core-server:8.20.11
+              nicoherbigde/atlassian-jira-core-server:8.20.12
+              nicoherbigio/atlassian-jira-core-server:8.20.12
 
     steps:
       - name: Checkout Git Repository
