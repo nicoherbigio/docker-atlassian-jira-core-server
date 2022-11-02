@@ -25,16 +25,12 @@ jobs:
             docker-context: 8.13/ubuntu/default
             docker-tags: |
               nicoherbigde/atlassian-jira-core-server:8.13
-              nicoherbigio/atlassian-jira-core-server:8.13
               nicoherbigde/atlassian-jira-core-server:8.13.27
-              nicoherbigio/atlassian-jira-core-server:8.13.27
           - version: 8.20
             docker-context: 8.20/ubuntu/default
             docker-tags: |
               nicoherbigde/atlassian-jira-core-server:8.20
-              nicoherbigio/atlassian-jira-core-server:8.20
               nicoherbigde/atlassian-jira-core-server:8.20.14
-              nicoherbigio/atlassian-jira-core-server:8.20.14
 
     steps:
       - name: Checkout Git Repository
