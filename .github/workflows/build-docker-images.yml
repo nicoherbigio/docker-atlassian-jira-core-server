@@ -19,18 +19,22 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        version: [8.13, 8.20]
+        version: [8.13-jammy, 8.20-jammy]
         include:
-          - version: 8.13
+          - version: 8.13-jammy
             docker-context: 8.13/ubuntu/default
             docker-tags: |
               nicoherbigde/atlassian-jira-core-server:8.13
+              nicoherbigde/atlassian-jira-core-server:8.13-jammy
               nicoherbigde/atlassian-jira-core-server:8.13.27
-          - version: 8.20
+              nicoherbigde/atlassian-jira-core-server:8.13.27-jammy
+          - version: 8.20-jammy
             docker-context: 8.20/ubuntu/default
             docker-tags: |
               nicoherbigde/atlassian-jira-core-server:8.20
+              nicoherbigde/atlassian-jira-core-server:8.20-jammy
               nicoherbigde/atlassian-jira-core-server:8.20.14
+              nicoherbigde/atlassian-jira-core-server:8.20.14-jammy
 
     steps:
       - name: Checkout Git Repository
